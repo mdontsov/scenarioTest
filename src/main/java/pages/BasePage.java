@@ -1,6 +1,7 @@
 package pages;
 
 import driverfactory.DriverFactory;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 public class BasePage extends DriverFactory {
@@ -11,7 +12,11 @@ public class BasePage extends DriverFactory {
 
     public BasePage() {
         super();
-        this.webDriver.get(getUrl());
+        webDriver.get(getUrl());
         PageFactory.initElements(webDriver, this);
+    }
+
+    public WebDriver getDriver() {
+        return webDriver;
     }
 }
