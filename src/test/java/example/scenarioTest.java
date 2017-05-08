@@ -11,6 +11,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pageobjects.BasePage;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class scenarioTest {
 
@@ -27,11 +29,11 @@ public class scenarioTest {
         }
     }
 
-    @And("^search criteria is entered$")
-    public void searchCriteriaIsEntered() {
+    @And("^(.*) is entered$")
+    public void searchCriteriaIsEntered(String criteria) {
         try {
             Assert.assertTrue(basePage.googleSearchBar.isDisplayed());
-            basePage.googleSearchBar.sendKeys("hotel tallinn");
+            basePage.googleSearchBar.sendKeys(criteria);
         } catch (Exception e) {
             StringWriter stringWriter = new StringWriter();
             e.printStackTrace(new PrintWriter(stringWriter));
@@ -61,12 +63,16 @@ public class scenarioTest {
         }
     }
 
-    @Then("^search criteria result is listed first$")
+    @Then("^print search results$")
     public void searchCriteriaIsDisplayedFirst() {
         try {
-            String str = basePage.searchResultsPage.searchResults.get(0).getText();
-            System.out.println(str);
-            Assert.assertTrue(str.toLowerCase().contains("hotel tallinn"));
+            for (int i = 0; i < basePage.searchResultsPage.searchResults.size(); i++) {
+                Pattern pattern = Pattern.compile("\\bHotel Tallinn\\b.*");
+                Matcher matcher = pattern.matcher(basePage.searchResultsPage.searchResults.get(i).getText());
+                if (matcher.find()) {
+                    System.out.println(matcher.group());
+                }
+            }
         } catch (Exception e) {
             StringWriter stringWriter = new StringWriter();
             e.printStackTrace(new PrintWriter(stringWriter));

@@ -4,7 +4,7 @@ Feature: Search with Google
   Scenario: Make search request
 
     Given Google webpage is opened
-    And search criteria is entered
+    And hotel tallinn is entered
     Then Enter key is pressed
     When search results are displayed
-    Then search criteria result is listed first
+    Then print search results
