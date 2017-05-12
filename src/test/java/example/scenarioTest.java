@@ -8,7 +8,7 @@ import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import pageobjects.BasePage;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.regex.Matcher;
