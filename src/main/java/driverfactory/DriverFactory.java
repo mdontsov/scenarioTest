@@ -13,7 +13,7 @@ public class DriverFactory {
     protected WebDriver webDriver;
 
     public DriverFactory() {
-        System.setProperty("webdriver.chrome.driver", "bin/chromedriverMAC");
+        System.setProperty("webdriver.chrome.driver", "bin/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--dns-prefetch-disable");
         webDriver = new ChromeDriver(chromeOptions);
