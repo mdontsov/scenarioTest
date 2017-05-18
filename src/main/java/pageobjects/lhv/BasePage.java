@@ -26,11 +26,17 @@ public class BasePage extends DriverFactory {
     @FindBy(css = "account_type-C")
     public WebElement selectionLegal;
 
+    @FindBy(xpath = "//*[@id='form1']/table/tbody[1]/tr[1]/td/label/input")
+    public List<WebElement> leasingName;
+
     @FindBy(css = "#lease_type-HP")
     public WebElement financialLease;
 
     @FindBy(css = "lease_type-FL")
     public WebElement operatingLease;
+
+    @FindBy(xpath = "//*[@id='form1']/table/tbody[1]/tr[2]/td[1]/label/input")
+    public List<WebElement> leasingType;
 
     @FindBy(css = "#origin-price")
     public WebElement originPrice;

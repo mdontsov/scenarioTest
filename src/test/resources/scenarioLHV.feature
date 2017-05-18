@@ -6,8 +6,8 @@ Feature: Leasing application attempt
     Given webpage is opened
     And leasing form is displayed
     And button Proceed is disabled
-    Then user applies for Personal leasing
-    And user selects Operating lease type
+    Then user applies for leasing
+    And user selects leasing type
     When user inputs vehicle price of 20000
     Then user makes VAT selection
     And user inputs first Downpayment percent or sum
