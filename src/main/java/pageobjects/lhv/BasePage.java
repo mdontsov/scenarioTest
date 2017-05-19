@@ -23,7 +23,7 @@ public class BasePage extends DriverFactory {
     @FindBy(css = "#account_type-P")
     public WebElement selectionPerson;
 
-    @FindBy(css = "account_type-C")
+    @FindBy(css = "#account_type-C")
     public WebElement selectionLegal;
 
     @FindBy(xpath = "//*[@id='form1']/table/tbody[1]/tr[1]/td/label/input")
@@ -41,28 +41,28 @@ public class BasePage extends DriverFactory {
     @FindBy(css = "#origin-price")
     public WebElement originPrice;
 
+    @FindBy(css = ".select.grid3")
+    public WebElement vatPayment;
+
+    @FindBy(xpath = "//*[@id='vat_scheduling']/option")
+    public List<WebElement> vatScheduling;
+
     @FindBy(css = "#vat_included")
     public WebElement vatIncluded;
 
     @FindBy(css = "#initial_percentage")
     public WebElement initialPercentage;
 
-    @FindBy(css = "#initial")
-    public WebElement initialMoneySum;
+    @FindBy(xpath = "//*[@id='duration_years']/option")
+    public List<WebElement> leasePeriodYears;
 
-    @FindBy(css = "#duration_years")
-    public List<WebElement> durationYears;
-
-    @FindBy(css = "#duration_months")
-    public List<WebElement> durationMonth;
+    @FindBy(xpath = "//*[@id='duration_months']/option")
+    public List<WebElement> leasePeriodMonths;
 
     @FindBy(css = "#reminder_percentage")
     public WebElement reminderPercentage;
 
-    @FindBy(css = "#reminder")
-    public WebElement reminderMoneySum;
-
-    @FindBy(css = "#payment_day")
+    @FindBy(css = "//*[@id='payment_day']/option")
     public List<WebElement> paymentDay;
 
     @FindBy(css = "button[value='Edasi']")
@@ -74,7 +74,7 @@ public class BasePage extends DriverFactory {
     }
 
     public FluentWait<WebDriver> wait = new FluentWait<WebDriver>(getDriver())
-            .withTimeout(60, TimeUnit.SECONDS)
+            .withTimeout(5, TimeUnit.SECONDS)
             .pollingEvery(1, TimeUnit.SECONDS)
             .ignoring(NoSuchElementException.class);
 

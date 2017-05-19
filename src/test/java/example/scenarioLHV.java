@@ -7,6 +7,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import pageobjects.lhv.BasePage;
 
 import java.util.Random;
@@ -74,8 +76,16 @@ public class scenarioLHV {
     @When("^user inputs vehicle price of (\\d+)$")
     public void userInputsVehiclePriceOf(int vehiclePrice) throws Throwable {
         try {
+            basePage.originPrice.sendKeys("" + vehiclePrice);
+            Thread.sleep(2000);
+//            basePage.wait.until(new ExpectedCondition<Boolean>() {
+//                public Boolean apply(WebDriver webDriver) {
+//                    return basePage.originPrice.getText().length() >= 4;
+//                }
+//            });
             if (vehiclePrice < 3000) {
-
+                ((JavascriptExecutor) basePage.getDriver())
+                        .executeScript("(alert('Please input the vehicle price higher than 3000'));");
             }
         } catch (Throwable t) {
             System.out.println(t.getCause().toString());
@@ -85,16 +95,26 @@ public class scenarioLHV {
     @Then("^user makes VAT selection$")
     public void userMakesVATSelection() throws Throwable {
         try {
-
+            if (basePage.selectionLegal.isSelected() && basePage.financialLease.isSelected()) {
+                basePage.vatIncluded.click();
+                basePage.wait.until(ExpectedConditions.visibilityOf(basePage.vatPayment));
+                index = random.nextInt(basePage.vatScheduling.size());
+                basePage.vatScheduling.get(index).click();
+            }
         } catch (Throwable t) {
             System.out.println(t.getCause().toString());
         }
     }
 
-    @And("^user inputs first Downpayment percent or sum$")
-    public void userInputsFirstDownpaymentPercentOrSum() throws Throwable {
+    @And("^user inputs initial Downpayment percent of (\\d+)$")
+    public void userInputsFirstDownpaymentPercentOrSum(int percentage) throws Throwable {
         try {
-
+            basePage.initialPercentage.sendKeys("" + percentage);
+            Thread.sleep(2000);
+            if (percentage < 10) {
+                ((JavascriptExecutor) basePage.getDriver())
+                        .executeScript("(alert('Initial downpayment percentage cannot be lower than 10'));");
+            }
         } catch (Throwable t) {
             System.out.println(t.getCause().toString());
         }
@@ -103,7 +123,13 @@ public class scenarioLHV {
     @Then("^user selects lease period years$")
     public void userSelectsLeasePeriodYears() throws Throwable {
         try {
-
+            index = random.nextInt(basePage.leasePeriodYears.size());
+            basePage.leasePeriodYears.get(index).click();
+            if (index < 6) {
+                userSelectsLeasePeriodMonths();
+            } else {
+                userInputsTheResidualValuePercentOrSum();
+            }
         } catch (Throwable t) {
             System.out.println(t.getCause().toString());
         }
@@ -112,34 +138,37 @@ public class scenarioLHV {
     @And("^user selects lease period months$")
     public void userSelectsLeasePeriodMonths() throws Throwable {
         try {
-
-        } catch (Throwable t) {
-            System.out.println(t.getCause().toString());
+            index = random.nextInt(basePage.leasePeriodMonths.size());
+            basePage.leasePeriodMonths.get(index).click();
+        } catch (RuntimeException rte) {
+            rte.printStackTrace();
         }
     }
 
     @When("^user inputs the Residual value percent or sum$")
     public void userInputsTheResidualValuePercentOrSum() throws Throwable {
         try {
-
+            index = random.nextInt(90) + 1;
+            basePage.reminderPercentage.sendKeys("" + index);
         } catch (Throwable t) {
             System.out.println(t.getCause().toString());
         }
     }
 
-    @Then("^user selects the payment date$")
+    @And("^user selects the payment date$")
     public void userSelectsThePaymentDate() throws Throwable {
         try {
-
+            index = random.nextInt(basePage.paymentDay.size());
+            basePage.paymentDay.get(index).click();
         } catch (Throwable t) {
             System.out.println(t.getCause().toString());
         }
     }
 
-    @And("^button Proceed is enabled$")
+    @Then("^button Proceed is enabled$")
     public void buttonProceedIsEnabled() throws Throwable {
         try {
-
+            Assert.assertTrue(basePage.buttonForward.isEnabled());
         } catch (Throwable t) {
             System.out.println(t.getCause().toString());
         }

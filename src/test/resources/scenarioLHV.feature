@@ -8,11 +8,11 @@ Feature: Leasing application attempt
     And button Proceed is disabled
     Then user applies for leasing
     And user selects leasing type
-    When user inputs vehicle price of 20000
+    When user inputs vehicle price of 5000
     Then user makes VAT selection
-    And user inputs first Downpayment percent or sum
+    And user inputs initial Downpayment percent of 15
     Then user selects lease period years
     And user selects lease period months
     When user inputs the Residual value percent or sum
-    Then user selects the payment date
-    And button Proceed is enabled
+    And user selects the payment date
+    Then button Proceed is enabled
