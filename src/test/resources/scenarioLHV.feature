@@ -1,4 +1,4 @@
-@start
+@start @end
 Feature: Leasing application attempt
 
   Scenario: Fill the first page of leasing application form following the rules

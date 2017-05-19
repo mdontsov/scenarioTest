@@ -62,7 +62,7 @@ public class BasePage extends DriverFactory {
     @FindBy(css = "#reminder_percentage")
     public WebElement reminderPercentage;
 
-    @FindBy(css = "//*[@id='payment_day']/option")
+    @FindBy(xpath = "//*[@id='payment_day']/option")
     public List<WebElement> paymentDay;
 
     @FindBy(css = "button[value='Edasi']")
