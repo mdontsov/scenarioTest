@@ -160,8 +160,8 @@ public class scenarioLHV {
         try {
             index = random.nextInt(basePage.paymentDay.size());
             basePage.paymentDay.get(index).click();
-        } catch (Throwable t) {
-            System.out.println(t.getCause().toString());
+        } catch (RuntimeException rte) {
+            rte.printStackTrace();
         }
     }
 
